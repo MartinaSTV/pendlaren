@@ -3,11 +3,11 @@
 // skriv ut hållplater och visa för användare. Med component?
 // Spara hållplats valet från användaren: Spara i localStorage eller redux eller skicka props.
 // visa avgångar för anvädaren.
-
+//level upp om tid finns
 
 import { useState } from 'react'
 import './App.css'
-import { getCordinates, getBusStops } from './getCordinates'
+import { getCordinates, getBusStops, getDepatures } from './getCordinates'
 import BusStop from './components/Stations'
 
 interface CoordsType{
@@ -15,46 +15,38 @@ interface CoordsType{
   lattitude: number
 }
 interface ResponseData{
-  StopLocation: { name: String,
-                  id: String
-                }
+  StopLocation: ResponseDataLocation
 }
+interface ResponseDataLocation{name: String, id: String }
 
 function App() {
   const [message, setMessage] = useState('')
 
   const [coords, setcoords] = useState<CoordsType>({ longitude: 0, lattitude: 0})
   const [Stops, setStops] = useState<ResponseData[]>([])
-  let [favoriteStop, setFavoriteStop] = useState()
-
-  
-  function cordinates(){
-    getCordinates(setMessage, setcoords)
-  }
-  function showStops (){
-    getBusStops(coords, setStops)
-   }
+  const [favoriteStop, setFavoriteStop] = useState({})
  
    let stopLocation = Stops.map((stop)=>{
 
-   return <BusStop stop ={ stop } key = {stop.StopLocation.id} setFavoriteStop = { setFavoriteStop } /> 
+   return <BusStop stop = { stop } key = {stop.StopLocation.id} setFavoriteStop = { setFavoriteStop } /> 
 
   })
 
   return (
     <div>
       <h1>Reseplanerare</h1>
-      <button onClick={ cordinates }>Planera resa från din plats</button>
+      <button onClick={ ()=>{getCordinates(setMessage, setcoords) } }>Planera resa från din plats</button>
       <p>{ message }</p>
 
-      <button onClick={ showStops } >Visa närmaste hållplatser</button>
+      <button onClick={ ()=>{getBusStops(coords, setStops) } } >Visa närmaste hållplatser</button>
       <h2>Dina Hållplatser</h2>
       <article>{stopLocation}</article>
-      <h2>Din valda hållplats är: </h2>
-
+      <h2>Din valda hållplats är: { favoriteStop.name }</h2>
+      <button onClick={ ()=>{ getDepatures( favoriteStop )} }>visa avgångar</button>
+  
     </div>
   )
 }
 
 export default App
-export type {CoordsType}
+export type {CoordsType, ResponseData}
