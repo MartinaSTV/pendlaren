@@ -6,7 +6,7 @@ type SetCoordsType = React.Dispatch<React.SetStateAction<CoordsType>>
 type setStops = React.Dispatch<React.SetStateAction<ResponseData[]>>
 
 function getCordinates(setMessage: SetMessageType, setcoords:SetCoordsType ){
-
+//Hämta kordinatater från webbläsaren med navigator och spara i useState i app
     if( 'geolocation' in navigator){
         navigator.geolocation.getCurrentPosition((position: GeolocationPosition )=>{
 
@@ -23,13 +23,11 @@ function getCordinates(setMessage: SetMessageType, setcoords:SetCoordsType ){
     }
 }
 
-const API_KEY: string = 'acd1d9e9-765b-470e-aa21-cd3889234d83';
-
 async function getBusStops(coords: CoordsType, setStops: setStops){
-
+//skicka med kordinater till API och spara hållplatser i useState i App
     console.log(coords.lattitude)
 
-    const API = `https://api.resrobot.se/v2.1/location.nearbystops?originCoordLat=${ coords.lattitude}&originCoordLong=${ coords.longitude}&format=json&accessId=${API_KEY}`
+    const API = `https://api.resrobot.se/v2.1/location.nearbystops?originCoordLat=${ coords.lattitude }&originCoordLong=${ coords.longitude}&format=json&accessId=${import.meta.env.VITE_API_KEY }`
 
     const response = await fetch( API)
     const data = await response.json()
@@ -41,10 +39,13 @@ async function getBusStops(coords: CoordsType, setStops: setStops){
 }
 
 async function getDepatures(stopInfo: StopLocation){
-    //skicka med extId och hämta departure
+    //skicka med extId och hämta departure samt en Error if location not valid
     console.log(stopInfo.extId)
+    const API_KEY: string = import.meta.env.VITE_API_KEY;
 
-    const response = await fetch(`https://api.resrobot.se/v2.1/departureBoard?id=${ stopInfo.extId }format=json&accessId=${API_KEY}`)
+    let url =` https://api.resrobot.se/v2.1/departureBoard?id=${ stopInfo.extId }&format=json&accessId=${ API_KEY}`
+
+    const response = await fetch(url)
     const data = await response.json() 
     console.log(data)
 
