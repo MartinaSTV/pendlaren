@@ -3,7 +3,7 @@
 // skriv ut hållplater och visa för användare. Med component?
 // Spara hållplats valet från användaren: Spara i localStorage eller redux eller skicka props.
 // visa avgångar för anvädaren.
-//level upp om tid finns
+//level upp om tid finnss
 
 import { useState } from 'react'
 import './App.css'
