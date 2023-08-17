@@ -15,7 +15,7 @@ interface CoordsType{
   lattitude: number
 }
 interface ResponseData{
-  StopLocation: ResponseDataLocation
+  StopLocation: ResponseDataLocation[]
 }
 interface ResponseDataLocation{name: String, id: String }
 
