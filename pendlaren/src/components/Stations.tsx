@@ -5,10 +5,9 @@ interface PropsStop{
     }
 }
 interface StopLocation{
-    extId: String
+    extId: String,
     name: String
 }
-
 
 function BusStop(props:PropsStop){
     //console.log(props)
