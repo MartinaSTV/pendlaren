@@ -9,6 +9,9 @@ import { useState } from 'react'
 import './App.css'
 import { getCordinates, getBusStops, getDepatures } from './getCordinates'
 import BusStop from './components/Stations'
+import { StopLocation, PropsStop } from './components/Stations'
+
+type StateFavorite = React.Dispatch<React.SetStateAction<{}>>
 
 interface CoordsType{
   longitude: number,
@@ -17,7 +20,7 @@ interface CoordsType{
 interface ResponseData{
   StopLocation: ResponseDataLocation[]
 }
-interface ResponseDataLocation{name: String, id: String }
+interface ResponseDataLocation{name: String, exId: String }
 
 function App() {
   const [message, setMessage] = useState('')
@@ -26,9 +29,9 @@ function App() {
   const [Stops, setStops] = useState<ResponseData[]>([])
   const [favoriteStop, setFavoriteStop] = useState({})
  
-   let stopLocation = Stops.map((stop)=>{
+   let stopLocation = Stops.map((stop: ResponseData)=>{
 
-   return <BusStop stop = { stop } key = {stop.StopLocation.id} setFavoriteStop = { setFavoriteStop } /> 
+   return <BusStop stop = { stop } key = {stop.StopLocation.extId} setFavoriteStop = { setFavoriteStop } /> 
 
   })
 
