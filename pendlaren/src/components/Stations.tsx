@@ -1,5 +1,3 @@
-import { useState } from "react";
-import { getDepatures } from "../getCordinates";
 
 interface PropsStop{
     setFavoriteStop: ({})=> void,
@@ -12,10 +10,9 @@ interface StopLocation{
     name: String
 }
 
-function BusStop(props:PropsStop){
-    //console.log(props)
-    let info = props.stop.StopLocation;
 
+function BusStop(props:PropsStop){
+    let info = props.stop.StopLocation;
 
     return(
         <article>
