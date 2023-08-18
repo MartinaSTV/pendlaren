@@ -1,5 +1,7 @@
 import'./timeplace.css'
-function TimePlace({timeInfo}){
+import {  PropstimeInfo} from '../interfaces'
+
+function TimePlace({timeInfo}:PropstimeInfo){
 
     return(
         <article className='timetable'>
