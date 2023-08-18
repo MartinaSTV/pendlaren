@@ -1,10 +1,13 @@
-
+import'./timeplace.css'
 function TimePlace({timeInfo}){
 
     return(
-        <article>
-            <p>{timeInfo.name}</p>
-            <p>{timeInfo.time}</p>
+        <article className='timetable'>
+            <p className='time'>Hållpats: {timeInfo.stop}</p>
+                <article className='text'>
+                    <p className='time'>Fordon: {timeInfo.name}</p>
+                    <p className='time'>Avgång: {timeInfo.time}</p>
+                </article>
         </article>
     )
 }

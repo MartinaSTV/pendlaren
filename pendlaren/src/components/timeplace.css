@@ -1,0 +1,15 @@
+.timetable{
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid lightgray;
+    padding: 0.5rem;
+    border-radius: 3px;
+    margin: 3px;
+}
+.time{
+    padding-right: 1rem;
+}
+.text{
+    display: flex;
+    font-weight: 400;
+}

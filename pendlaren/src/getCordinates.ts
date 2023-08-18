@@ -1,9 +1,6 @@
 import { CoordsType } from "./App"
-import { ResponseData } from "./App"
 import { StopLocation } from "./components/Stations"
-type SetMessageType = React.Dispatch<React.SetStateAction<string>>
-type SetCoordsType = React.Dispatch<React.SetStateAction<CoordsType>>
-type setStops = React.Dispatch<React.SetStateAction<ResponseData[]>>
+import { SetMessageType, SetCoordsType, setStops } from "./interfaces"
 
 function getCordinates(setMessage: SetMessageType, setcoords:SetCoordsType ){
 //Hämta kordinatater från webbläsaren med navigator och spara i useState i app. Gör en async på denna
@@ -35,7 +32,6 @@ async function getBusStops(coords: CoordsType, setStops: setStops){
     console.log(data.stopLocationOrCoordLocation)
 
     setStops(data.stopLocationOrCoordLocation)  
-
 }
 
 async function getDepatures(stopInfo: StopLocation, setTimes){
@@ -49,7 +45,6 @@ async function getDepatures(stopInfo: StopLocation, setTimes){
     const data = await response.json() 
     console.log(data)
     setTimes(data.Departure)
-
 }
 
 export { getCordinates, getBusStops, getDepatures }
