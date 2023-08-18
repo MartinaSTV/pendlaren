@@ -1,23 +1,17 @@
-
-interface PropsStop{
-    setFavoriteStop: ({})=> void,
-    stop: {
-        StopLocation: StopLocation
-    }
-}
-interface StopLocation{
-    extId: String,
-    name: String
-}
-
+import { PropsStop, StopLocation  } from "../interfaces";
 
 function BusStop(props:PropsStop){
     let info = props.stop.StopLocation;
 
+    let handleClick = ()=>{ 
+        props.setFavoriteStop({extId: info.extId, name: info.name}) 
+        props.sethiddStops(false)
+    }
+
     return(
         <article>
             <h3>{info.name}</h3>
-            <button onClick={ ()=>{ props.setFavoriteStop({extId: info.extId, name: info.name})  } }>Spara hållplats</button>
+            <button onClick={  handleClick }>Spara hållplats</button>
         </article>
     )
 
