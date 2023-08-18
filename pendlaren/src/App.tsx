@@ -17,10 +17,9 @@ function App() {
   const [message, setMessage] = useState('')
   const [coords, setcoords] = useState<CoordsType>({ longitude: 0, lattitude: 0})
   const [Stops, setStops] = useState<ResponseData[]>([])
-  console.log(Stops)
   const [favoriteStop, setFavoriteStop] = useState<FavoriteStopType | null >(null)
   const [times, setTimes]= useState<SetTimeTab | []>([])
-  console.log(times)
+  console.log('tiderna',times)
   const [hiddStops, sethiddStops] = useState(true)// döljer hållplatser om false
   
   // skriver ut hållplatser
@@ -28,7 +27,7 @@ function App() {
     return <BusStop stop = { stop } key = {stop.StopLocation.extId} setFavoriteStop = { setFavoriteStop }  sethiddStops={ sethiddStops}/>
   })
  
-  //skriver ut tider 
+  //skriver ut tider , finns en bugg när man vill byta hållplats. då måste man trycka på visa hållplatser igen
   let timetable = times?.map((timeInfo:SetTimeTables)=>( <TimePlace timeInfo = { timeInfo } key={ timeInfo.StopExtId}/> ))
 
   return (
