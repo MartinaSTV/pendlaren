@@ -1,12 +1,9 @@
 import { CoordsType } from "./App"
-import { ResponseData } from "./App"
-import { StopLocation } from "./components/Stations"
-type SetMessageType = React.Dispatch<React.SetStateAction<string>>
-type SetCoordsType = React.Dispatch<React.SetStateAction<CoordsType>>
-type setStops = React.Dispatch<React.SetStateAction<ResponseData[]>>
+import { StopLocation } from "./interfaces"
+import { SetMessageType, SetCoordsType, SetStops, SetTimeTab } from "./interfaces"
 
 function getCordinates(setMessage: SetMessageType, setcoords:SetCoordsType ){
-//Hämta kordinatater från webbläsaren med navigator och spara i useState i app
+//Hämta kordinatater från webbläsaren med navigator och spara i useState i app. Gör en async på denna
     if( 'geolocation' in navigator){
         navigator.geolocation.getCurrentPosition((position: GeolocationPosition )=>{
 
@@ -23,7 +20,7 @@ function getCordinates(setMessage: SetMessageType, setcoords:SetCoordsType ){
     }
 }
 
-async function getBusStops(coords: CoordsType, setStops: setStops){
+async function getBusStops(coords: CoordsType, setStops: SetStops){
 //skicka med kordinater till API och spara hållplatser i useState i App
     console.log(coords.lattitude)
 
@@ -35,10 +32,9 @@ async function getBusStops(coords: CoordsType, setStops: setStops){
     console.log(data.stopLocationOrCoordLocation)
 
     setStops(data.stopLocationOrCoordLocation)  
-
 }
 
-async function getDepatures(stopInfo: StopLocation){
+async function getDepatures(stopInfo: StopLocation, setTimes: SetTimeTab){
     //skicka med extId och hämta departure samt en Error if location not valid
     console.log(stopInfo.extId)
     const API_KEY: string = import.meta.env.VITE_API_KEY;
@@ -48,7 +44,7 @@ async function getDepatures(stopInfo: StopLocation){
     const response = await fetch(url)
     const data = await response.json() 
     console.log(data)
-
+    setTimes(data.Departure)
 }
 
 export { getCordinates, getBusStops, getDepatures }
