@@ -2,7 +2,7 @@ import { CoordsType } from "./App"
 import { StopLocation } from "./components/Stations"
 import { SetMessageType, SetCoordsType, setStops } from "./interfaces"
 
-function getCordinates(setMessage: SetMessageType, setcoords:SetCoordsType ){
+async function getCordinates(setMessage: SetMessageType, setcoords:SetCoordsType ){
 //Hämta kordinatater från webbläsaren med navigator och spara i useState i app. Gör en async på denna
     if( 'geolocation' in navigator){
         navigator.geolocation.getCurrentPosition((position: GeolocationPosition )=>{

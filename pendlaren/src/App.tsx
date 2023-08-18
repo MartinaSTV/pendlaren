@@ -30,12 +30,17 @@ function App() {
   //skriver ut tider 
   let timetable = times?.map((timeInfo:SetTimeTables)=>( <TimePlace timeInfo = { timeInfo } key={ timeInfo.extId}/> ))
 
+  let trip = ()=>{ getCordinates(setMessage, setcoords) 
+    sethiddStops(true)  } 
+
   return (
     <div className='travelplaner'>
     <h1>Reseplanerare</h1>
-    <button onClick={ ()=>{getCordinates(setMessage, setcoords) } }>Planera resa från din plats</button>
+    <button onClick={ trip }>Planera resa från din plats</button>
     <p>{ message }</p>
-    <button onClick={ async()=>{ await getBusStops(coords, setStops) } } >Visa närmaste hållplatser</button>
+    <button onClick={ async()=>{ await getBusStops(coords, setStops)
+     sethiddStops(true) 
+    } } >Visa närmaste hållplatser</button>
     <article>{hiddStops? stopLocation: <p></p>}</article>
     <article>   { Stops.length> 0? <h2>Din valda hållplats är: { favoriteStop?.name }</h2>  : ''} </article>
    { favoriteStop? <button className='button-departures' onClick={ ()=>{ getDepatures( favoriteStop, setTimes )} }>visa avgångar</button>: null}
