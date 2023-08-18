@@ -1,5 +1,5 @@
 import { CoordsType } from "./App"
-import { StopLocation } from "./components/Stations"
+import { StopLocation } from "./interfaces"
 import { SetMessageType, SetCoordsType, SetStops, SetTimeTab } from "./interfaces"
 
 function getCordinates(setMessage: SetMessageType, setcoords:SetCoordsType ){

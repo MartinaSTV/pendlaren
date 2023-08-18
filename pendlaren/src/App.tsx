@@ -33,21 +33,27 @@ function App() {
 
   return (
     <div className='travelplaner'>
-    <h1>Reseplanerare</h1>
-    <button onClick={ ()=>{ getCordinates(setMessage, setcoords) 
-      }  }>Planera resa från din plats</button>
-    <p>{ message }</p>
-    <button onClick={  async()=>{ await getBusStops(coords, setStops)
-     sethiddStops(true) 
-    } } >Visa närmaste hållplatser</button>
-    <article>{hiddStops? stopLocation: <p></p>}</article>
-    <article>   { Stops.length> 0? <h2>Din valda hållplats är: { favoriteStop?.name }</h2>  : ''} </article>
-   { favoriteStop? <button className='button-departures' onClick={ ()=>{ getDepatures( favoriteStop, setTimes )} }>visa avgångar</button>: null}
-      { times ? timetable : <p>Välj Hållplats</p>}
+      <h1>Reseplanerare</h1>
+      <button onClick={ ()=>{ getCordinates(setMessage, setcoords) 
+        }  }>Planera resa från din plats</button>
+      <p>{ message }</p>
+        <article className='travalplaner-coords'>
+          <p className='coords'>Dina Kordinater : </p>
+          <p className='coords'>Lattitude {coords.lattitude}</p>
+          <p className='coords'>Longitude {coords.longitude}</p>
+        </article>
+      {coords.lattitude >0 ?
+      <button onClick={  async()=>{ await getBusStops(coords, setStops)
+      sethiddStops(true) 
+      } } >Visa närmaste hållplatser</button>: null }
+      <article>{hiddStops? stopLocation: <p></p>}</article>
+      <article>{ Stops.length> 0? <h2>Din valda hållplats är: { favoriteStop?.name }</h2>  : ''} </article>
+      { favoriteStop? <button className='button-departures' onClick={ ()=>{ getDepatures( favoriteStop, setTimes )} }>visa avgångar</button>: null}
+        { times ? timetable : <p>Välj Hållplats</p>}
     </div>
     )
   }
   
   export default App
-  export type {CoordsType, ResponseData}
+
   

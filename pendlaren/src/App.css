@@ -19,4 +19,9 @@
 .button-departures{
   margin: 1rem;
 }
-
+.travalplaner-coords{
+  display: flex;
+}
+.coords{
+  padding-right: 0.5rem;
+}
