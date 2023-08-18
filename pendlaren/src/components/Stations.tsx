@@ -14,7 +14,6 @@ function BusStop(props:PropsStop){
             <button onClick={  handleClick }>Spara hållplats</button>
         </article>
     )
-
 }
 export default BusStop
 export type {StopLocation, PropsStop}
