@@ -2,7 +2,7 @@ import { PropsStop} from "../interfaces";
 
 function BusStop(props:PropsStop){
     let info = props.stop.StopLocation;
-    console.log(info)
+    //console.log(info)
     
     let handleClick = ()=>{ 
         props.setFavoriteStop({extId: info.extId, name: info.name , dist: info.dist}) 

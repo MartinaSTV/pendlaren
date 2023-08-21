@@ -1,0 +1,13 @@
+.travalLocation{
+    display: flex;
+    flex-direction: column;
+}
+.input{
+    padding: 0.5rem;
+    height: 1rem;
+    max-width: 20rem;
+}
+.button{
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+}
