@@ -30,9 +30,7 @@ async function getBusStops(coords: CoordsType, setStops: SetStops){
 
     const response = await fetch( API)
     const data = await response.json()
-    console.log(data)
-    console.log(data.stopLocationOrCoordLocation)
-
+    //console.log(data.stopLocationOrCoordLocation)
     setStops(data.stopLocationOrCoordLocation)  
 }
 
@@ -46,7 +44,7 @@ async function getDepatures(stopInfo: StopLocation, setTimes: SetTimeTab){
 
     const response = await fetch(url)
     const data:DataLocation = await response.json() 
-    console.log(data.Departure)
+    //console.log(data.Departure)
     setTimes(data.Departure)
 }
 

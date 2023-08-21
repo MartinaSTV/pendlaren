@@ -15,7 +15,6 @@ function App() {
   const [Stops, setStops] = useState<ResponseData[]>([])
   const [favoriteStop, setFavoriteStop] = useState<FavoriteStopType | null >(null)
   const [times, setTimes]= useState<SetTimeTables[]>([])
-  console.log('tide',times)
   const [hiddStops, sethiddStops] = useState(true)// döljer hållplatser om false
   const [cordToName, setCordToName] = useState<NamesLocation[]>([])
 
@@ -34,7 +33,6 @@ function App() {
   let cordinates = async()=>{ 
     try{
        const pos = await getCordinates(); 
-       console.log('kordinater',pos)
        setcoords(pos);
        await ReverseGeolocation(pos.latitude, pos.longitude, setCordToName);
 
