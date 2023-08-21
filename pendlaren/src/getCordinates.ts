@@ -1,30 +1,32 @@
-import { CoordsType } from "./App"
-import { StopLocation } from "./interfaces"
-import { SetMessageType, SetCoordsType, SetStops, SetTimeTab } from "./interfaces"
 
-function getCordinates(setMessage: SetMessageType, setcoords:SetCoordsType ){
-//Hämta kordinatater från webbläsaren med navigator och spara i useState i app. Gör en async på denna
-    if( 'geolocation' in navigator){
-        navigator.geolocation.getCurrentPosition((position: GeolocationPosition )=>{
+import { SetStops, SetTimeTab, CoordsType, StopLocation } from "./interfaces"
 
-            const lat = position.coords.latitude
-            const lon = position.coords.longitude
-            console.log(lat, lon)
-            setcoords({ longitude: lon, lattitude: lat })
-            setMessage('')
+async function getCordinates(): Promise<CoordsType>{
+    return new Promise ((resolve, reject) => {
+        if( 'geolocation' in navigator){
 
-        }, error =>{
-            console.log('Please enable position to use this app')
-            setMessage( 'Please enable position to use this app')
-        })
-    }
+                navigator.geolocation.getCurrentPosition(pos => {
+
+                    const position: CoordsType = {
+                        latitude: pos.coords.latitude,
+                        longitude: pos.coords.longitude
+                    }
+                    resolve(position)
+                    }, error => {
+                    reject(error.message)
+                })
+
+            } else{
+                reject('Please upgrade your browser to use this web app.')
+            }
+    })
 }
 
 async function getBusStops(coords: CoordsType, setStops: SetStops){
 //skicka med kordinater till API och spara hållplatser i useState i App
-    console.log(coords.lattitude)
+    console.log(coords.latitude)
 
-    const API = `https://api.resrobot.se/v2.1/location.nearbystops?originCoordLat=${ coords.lattitude }&originCoordLong=${ coords.longitude}&format=json&accessId=${import.meta.env.VITE_API_KEY }`
+    const API = `https://api.resrobot.se/v2.1/location.nearbystops?originCoordLat=${ coords.latitude }&originCoordLong=${ coords.longitude}&format=json&accessId=${import.meta.env.VITE_API_KEY }`
 
     const response = await fetch( API)
     const data = await response.json()
@@ -47,4 +49,15 @@ async function getDepatures(stopInfo: StopLocation, setTimes: SetTimeTab){
     setTimes(data.Departure)
 }
 
-export { getCordinates, getBusStops, getDepatures }
+async function getData(){ 
+
+    let response =  await fetch(`https://api.resrobot.se/v2.1/trip?format=json&originId=740000001&destId=740000003&passlist=true&showPassingPoints=true&accessId=${import.meta.env.VITE_API_KEY}`
+    ) 
+    const data = await response.json()
+    console.log(data)
+
+    }
+
+
+export { getCordinates, getBusStops, getDepatures, getData }
+
