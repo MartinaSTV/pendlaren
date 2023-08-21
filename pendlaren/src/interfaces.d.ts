@@ -58,3 +58,6 @@ export interface TravalInfo{
 export interface NamesLocation{
   name:string
 }
+export interface DataLocation{
+  Departure: SetTimeTables[]
+}

@@ -4,7 +4,7 @@ import './inputtravallocation.css'
 import { getData } from "../getCordinates"
 
 //du har ett namn, hämta cordinaterna för namnet.
-//hämta närmsta hållplater för dessa kordinater.
+//hämta avgångar för dessa kordinater.
 
 function InputTravalLocation(){
 
@@ -17,7 +17,7 @@ function InputTravalLocation(){
     }
 
     function data(){
-        
+
         getData()
     }
  

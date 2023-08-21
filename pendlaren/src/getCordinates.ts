@@ -1,5 +1,5 @@
 
-import { SetStops, SetTimeTab, CoordsType, StopLocation } from "./interfaces"
+import { SetStops, SetTimeTab, CoordsType, StopLocation, SetTimeTables, DataLocation } from "./interfaces"
 
 async function getCordinates(): Promise<CoordsType>{
     return new Promise ((resolve, reject) => {
@@ -30,11 +30,10 @@ async function getBusStops(coords: CoordsType, setStops: SetStops){
 
     const response = await fetch( API)
     const data = await response.json()
-    console.log(data)
-    console.log(data.stopLocationOrCoordLocation)
-
+    //console.log(data.stopLocationOrCoordLocation)
     setStops(data.stopLocationOrCoordLocation)  
 }
+
 
 async function getDepatures(stopInfo: StopLocation, setTimes: SetTimeTab){
     //skicka med extId och hämta departure samt en Error if location not valid
@@ -44,8 +43,8 @@ async function getDepatures(stopInfo: StopLocation, setTimes: SetTimeTab){
     let url =` https://api.resrobot.se/v2.1/departureBoard?id=${ stopInfo.extId }&format=json&accessId=${ API_KEY}`
 
     const response = await fetch(url)
-    const data = await response.json() 
-    console.log(data)
+    const data:DataLocation = await response.json() 
+    //console.log(data.Departure)
     setTimes(data.Departure)
 }
 
