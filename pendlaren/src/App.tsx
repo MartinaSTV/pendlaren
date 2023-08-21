@@ -3,7 +3,7 @@ import { useState } from 'react'
 import './App.css'
 import { getCordinates, getBusStops, getDepatures } from './getCordinates'
 import BusStop from './components/Stations'
-import { FavoriteStopType, CoordsType, ResponseData, SetTimeTab, SetTimeTables, SetCordName } from './interfaces'
+import { FavoriteStopType, CoordsType, ResponseData, SetTimeTab, SetTimeTables, SetCordName, NamesLocation } from './interfaces'
 import TimePlace from './components/TimePlace'
 import ReverseGeolocation from './ReverseGeolocation'
 import InputTravalLocation from './components/InputTravalLoaction'
@@ -14,10 +14,10 @@ function App() {
   const [coords, setcoords] = useState<CoordsType>({ longitude: 0, latitude: 0})
   const [Stops, setStops] = useState<ResponseData[]>([])
   const [favoriteStop, setFavoriteStop] = useState<FavoriteStopType | null >(null)
-  const [times, setTimes]= useState<SetTimeTab | []>([])
+  const [times, setTimes]= useState<SetTimeTables[]>([])
   console.log('tide',times)
   const [hiddStops, sethiddStops] = useState(true)// döljer hållplatser om false
-  const [cordToName, setCordToName] = useState< SetCordName[] | []>([])
+  const [cordToName, setCordToName] = useState<NamesLocation[]>([])
 
 
   // skriver ut hållplatser
@@ -29,7 +29,7 @@ function App() {
   let timetable = times?.map((timeInfo:SetTimeTables) =>( <TimePlace timeInfo = { timeInfo } key={ timeInfo.stopExtId}/> ))
 
   //skriver ut namnet på din plats
-  let nameLocation = cordToName?.map((namelocation)=>( <p className='coords' key={ namelocation.name } >{namelocation.name}</p> ))
+  let nameLocation = cordToName?.map((namelocation:NamesLocation)=>( <p className='coords' key={ namelocation.name } >{namelocation.name}</p> ))
 
   let cordinates = async()=>{ 
     try{

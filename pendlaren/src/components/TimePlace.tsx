@@ -2,7 +2,7 @@ import'./timeplace.css'
 import {  PropstimeInfo} from '../interfaces'
 
 function TimePlace({timeInfo}:PropstimeInfo){
-
+   
     return(
         <article className='timetable'>
             <p className='time'>Hållpats: {timeInfo.stop}</p>
